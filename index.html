@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Qual IA é melhor para você?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Qual IA é melhor para você?</h1>
+
+<div id="etapa1">
+  <p>1️⃣ Para que você quer usar IA?</p>
+  <button onclick="etapa2('texto')">Textos</button>
+  <button onclick="etapa2('video')">Vídeos</button>
+  <button onclick="etapa2('voz')">Voz</button>
+  <button onclick="etapa2('design')">Design</button>
+</div>
+
+<div id="etapa2" style="display:none;">
+  <p>2️⃣ Qual seu nível?</p>
+  <button onclick="resultado('iniciante')">Iniciante</button>
+  <button onclick="resultado('intermediario')">Intermediário</button>
+  <button onclick="resultado('avancado')">Avançado</button>
+</div>
+
+<div id="resultado"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
