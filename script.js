@@ -1,56 +1,67 @@
-let objetivo = "";
+const afiliados = {
+  iniciante: [
+    {
+      nome: "ChatGPT",
+      desc: "Ideal para começar, conversar e aprender",
+      link: "https://chat.openai.com/"
+    },
+    {
+      nome: "Canva",
+      desc: "Criação fácil de artes com IA",
+      link: "SEU_LINK_AFILIADO_AQUI"
+    }
+  ],
 
-function etapa2(tipo) {
-  objetivo = tipo;
-  document.getElementById("etapa1").style.display = "none";
-  document.getElementById("etapa2").style.display = "block";
+  intermediario: [
+    {
+      nome: "Notion AI",
+      desc: "Organização e produtividade com IA",
+      link: "SEU_LINK_AFILIADO_AQUI"
+    },
+    {
+      nome: "Midjourney",
+      desc: "Criação de imagens com IA",
+      link: "https://www.midjourney.com/"
+    }
+  ],
+
+  avancado: [
+    {
+      nome: "GitHub Copilot",
+      desc: "IA para programação profissional",
+      link: "SEU_LINK_AFILIADO_AQUI"
+    },
+    {
+      nome: "Claude AI",
+      desc: "IA avançada para textos longos",
+      link: "https://claude.ai/"
+    }
+  ]
+};
+
+function responder(nivel) {
+  document.getElementById("perguntas").classList.add("hidden");
+  document.getElementById("resultado").classList.remove("hidden");
+
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  afiliados[nivel].forEach(item => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <strong>${item.nome}</strong>
+      <p>${item.desc}</p>
+      <a href="${item.link}" target="_blank" rel="nofollow noopener">
+        Acessar →
+      </a>
+    `;
+    lista.appendChild(div);
+  });
 }
 
-function resultado(nivel) {
-  let r = document.getElementById("resultado");
-
-  if (objetivo === "texto") {
-    r.innerHTML = `
-      <h2>Ferramentas recomendadas</h2>
-      <ul>
-        <li>Jasper AI – escrita profissional</li>
-        <li>Copy.ai – textos rápidos</li>
-        <li>ChatGPT – uso geral</li>
-      </ul>
-    `;
-  }
-
-  if (objetivo === "video") {
-    r.innerHTML = `
-      <h2>Ferramentas recomendadas</h2>
-      <ul>
-        <li>Pictory AI – texto para vídeo</li>
-        <li>Runway ML – vídeos avançados</li>
-        <li>Canva IA – vídeos simples</li>
-      </ul>
-    `;
-  }
-
-  if (objetivo === "voz") {
-    r.innerHTML = `
-      <h2>Ferramentas recomendadas</h2>
-      <ul>
-        <li>ElevenLabs – voz realista</li>
-        <li>Murf AI – narração</li>
-      </ul>
-    `;
-  }
-
-  if (objetivo === "design") {
-    r.innerHTML = `
-      <h2>Ferramentas recomendadas</h2>
-      <ul>
-        <li>Canva IA</li>
-        <li>Adobe Firefly</li>
-      </ul>
-    `;
-  }
-
-  document.getElementById("etapa2").style.display = "none";
+function resetar() {
+  document.getElementById("resultado").classList.add("hidden");
+  document.getElementById("perguntas").classList.remove("hidden");
 }
 

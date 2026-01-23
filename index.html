@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Qual IA é melhor para você?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Qual IA é melhor para você?</h1>
+  <main class="container">
+    <h1>🤖 Qual IA é melhor para você?</h1>
+    <p class="sub">Responda e receba recomendações diretas</p>
 
-<div id="etapa1">
-  <p>1️⃣ Para que você quer usar IA?</p>
-  <button onclick="etapa2('texto')">Textos</button>
-  <button onclick="etapa2('video')">Vídeos</button>
-  <button onclick="etapa2('voz')">Voz</button>
-  <button onclick="etapa2('design')">Design</button>
-</div>
+    <section id="perguntas">
+      <h2>Seu nível:</h2>
+      <button onclick="responder('iniciante')">Iniciante</button>
+      <button onclick="responder('intermediario')">Intermediário</button>
+      <button onclick="responder('avancado')">Avançado</button>
+    </section>
 
-<div id="etapa2" style="display:none;">
-  <p>2️⃣ Qual seu nível?</p>
-  <button onclick="resultado('iniciante')">Iniciante</button>
-  <button onclick="resultado('intermediario')">Intermediário</button>
-  <button onclick="resultado('avancado')">Avançado</button>
-</div>
+    <section id="resultado" class="hidden">
+      <h2>Recomendações</h2>
+      <div id="lista"></div>
 
-<div id="resultado"></div>
+      <button class="voltar" onclick="resetar()">🔄 Refazer escolha</button>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
