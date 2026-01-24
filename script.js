@@ -1,16 +1,29 @@
 let nivel = "";
 
+// Etapa 1 → escolhe nível
 function setNivel(n) {
   nivel = n;
-  document.getElementById("objetivoCard").classList.remove("hidden");
+
+  const cardObjetivo = document.getElementById("objetivoCard");
+  cardObjetivo.classList.remove("hidden");
+
+  // rolagem suave até a próxima etapa
+  cardObjetivo.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
+// Etapa 2 → escolhe objetivo e vai para resultado
 function finalizar(objetivo) {
   localStorage.setItem("nivel", nivel);
   localStorage.setItem("objetivo", objetivo);
   window.location.href = "resultado.html";
 }
 
+// ===============================
+// Página de resultado
+// ===============================
 if (window.location.pathname.includes("resultado")) {
   const nivel = localStorage.getItem("nivel");
   const objetivo = localStorage.getItem("objetivo");
@@ -41,7 +54,10 @@ if (window.location.pathname.includes("resultado")) {
   dados[objetivo].forEach(item => {
     const div = document.createElement("div");
     div.className = "item";
-    div.innerHTML = `<h3>${item.nome}</h3><p>${item.desc}</p>`;
+    div.innerHTML = `
+      <h3>${item.nome}</h3>
+      <p>${item.desc}</p>
+    `;
     lista.appendChild(div);
   });
 }
