@@ -1,130 +1,63 @@
 let nivelSelecionado = "";
-let usoSelecionado = "";
+let objetivoSelecionado = "";
 
-function selectNivel(nivel) {
+function selecionarNivel(nivel) {
   nivelSelecionado = nivel;
-  document.getElementById("step1").classList.add("hidden");
-  document.getElementById("step2").classList.remove("hidden");
+
+  document.getElementById("objetivo").classList.remove("hidden");
+  document.getElementById("resultado").classList.add("hidden");
 }
 
-function selectUso(uso) {
-  usoSelecionado = uso;
-  document.getElementById("step2").classList.add("hidden");
+function selecionarObjetivo(objetivo) {
+  objetivoSelecionado = objetivo;
   mostrarResultado();
 }
 
 function mostrarResultado() {
-  const lista = document.getElementById("lista-recomendacoes");
-  lista.innerHTML = "";
+  const resultado = document.getElementById("resultado");
+  const lista = document.getElementById("lista-resultados");
 
-  const recomendacoes = bancoDeRecomendacoes[nivelSelecionado][usoSelecionado];
+  let recomendacoes = [];
 
-  recomendacoes.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <strong>${item.nome}</strong><br>
-      <a href="${item.link}" target="_blank">Acessar</a>
-    `;
-    lista.appendChild(li);
-  });
-
-  document.getElementById("resultado").classList.remove("hidden");
-}
-
-function resetar() {
-  nivelSelecionado = "";
-  usoSelecionado = "";
-  document.getElementById("resultado").classList.add("hidden");
-  document.getElementById("step1").classList.remove("hidden");
-}
-
-/* ==========================
-   BANCO DE RECOMENDAÇÕES
-   (troque só os nomes e links depois)
-========================== */
-
-const bancoDeRecomendacoes = {
-  iniciante: {
-    texto: [
-      { nome: "Ferramenta Texto A", link: "#" },
-      { nome: "Ferramenta Texto B", link: "#" },
-      { nome: "Curso IA para Textos", link: "#" }
-    ],
-    imagem: [
-      { nome: "Imagem IA A", link: "#" },
-      { nome: "Imagem IA B", link: "#" },
-      { nome: "Curso IA para Imagens", link: "#" }
-    ],
-    voz: [
-      { nome: "Voz IA A", link: "#" },
-      { nome: "Voz IA B", link: "#" },
-      { nome: "Curso Voz com IA", link: "#" }
-    ],
-    automacao: [
-      { nome: "Automação IA A", link: "#" },
-      { nome: "Automação IA B", link: "#" },
-      { nome: "Curso Automação IA", link: "#" }
-    ],
-    codigo: [
-      { nome: "IA Código A", link: "#" },
-      { nome: "IA Código B", link: "#" },
-      { nome: "Curso Programação com IA", link: "#" }
-    ]
-  },
-
-  intermediario: {
-    texto: [
-      { nome: "Texto Pro A", link: "#" },
-      { nome: "Texto Pro B", link: "#" },
-      { nome: "Curso Copy com IA", link: "#" }
-    ],
-    imagem: [
-      { nome: "Imagem Pro A", link: "#" },
-      { nome: "Imagem Pro B", link: "#" },
-      { nome: "Curso Imagem IA", link: "#" }
-    ],
-    voz: [
-      { nome: "Voz Pro A", link: "#" },
-      { nome: "Voz Pro B", link: "#" },
-      { nome: "Curso Voz Avançada", link: "#" }
-    ],
-    automacao: [
-      { nome: "Automação Pro A", link: "#" },
-      { nome: "Automação Pro B", link: "#" },
-      { nome: "Curso Automação Avançada", link: "#" }
-    ],
-    codigo: [
-      { nome: "Código Pro A", link: "#" },
-      { nome: "Código Pro B", link: "#" },
-      { nome: "Curso Dev com IA", link: "#" }
-    ]
-  },
-
-  avancado: {
-    texto: [
-      { nome: "Texto Expert A", link: "#" },
-      { nome: "Texto Expert B", link: "#" },
-      { nome: "Mentoria IA Texto", link: "#" }
-    ],
-    imagem: [
-      { nome: "Imagem Expert A", link: "#" },
-      { nome: "Imagem Expert B", link: "#" },
-      { nome: "Mentoria IA Visual", link: "#" }
-    ],
-    voz: [
-      { nome: "Voz Expert A", link: "#" },
-      { nome: "Voz Expert B", link: "#" },
-      { nome: "Mentoria Voz IA", link: "#" }
-    ],
-    automacao: [
-      { nome: "Automação Expert A", link: "#" },
-      { nome: "Automação Expert B", link: "#" },
-      { nome: "Mentoria Automação IA", link: "#" }
-    ],
-    codigo: [
-      { nome: "Código Expert A", link: "#" },
-      { nome: "Código Expert B", link: "#" },
-      { nome: "Mentoria Dev IA", link: "#" }
-    ]
+  if (objetivoSelecionado === "texto") {
+    recomendacoes = [
+      "ChatGPT",
+      "Claude",
+      "Gemini"
+    ];
   }
-};
+
+  if (objetivoSelecionado === "imagem") {
+    recomendacoes = [
+      "Midjourney",
+      "DALL·E",
+      "Leonardo AI"
+    ];
+  }
+
+  if (objetivoSelecionado === "video") {
+    recomendacoes = [
+      "Pika",
+      "Runway",
+      "Synthesia"
+    ];
+  }
+
+  if (objetivoSelecionado === "produtividade") {
+    recomendacoes = [
+      "Notion AI",
+      "ChatGPT",
+      "Microsoft Copilot"
+    ];
+  }
+
+  lista.innerHTML = `
+    <p><strong>Nível:</strong> ${nivelSelecionado}</p>
+    <p><strong>Objetivo:</strong> ${objetivoSelecionado}</p>
+    <ul>
+      ${recomendacoes.map(item => `<li>${item}</li>`).join("")}
+    </ul>
+  `;
+
+  resultado.classList.remove("hidden");
+}

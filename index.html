@@ -1,86 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Qual IA é melhor para você? | Guia rápido</title>
 
-  <!-- TÍTULO (o que aparece no Google) -->
-  <title>Qual IA Usar? Descubra a Melhor Inteligência Artificial para Você</title>
-
-  <!-- DESCRIÇÃO (texto abaixo do título no Google) -->
-  <meta name="description" content="Não sabe qual IA usar? Descubra a melhor inteligência artificial para texto, imagens, vídeos ou estudos com base no seu nível e objetivo.">
-
-  <!-- SEO básico -->
-  <meta name="keywords" content="qual ia usar, melhor ia, ferramentas de ia, ia para texto, ia para imagem, ia para vídeo, chatgpt alternativas">
-  <meta name="author" content="Qual IA">
-  <meta name="robots" content="index, follow">
-
-  <!-- Mobile -->
+  <meta name="description" content="Descubra qual inteligência artificial é melhor para você. Compare IAs para iniciantes, intermediários e avançados em escrita, imagens, vídeos e produtividade.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Open Graph (quando alguém compartilha o link) -->
-  <meta property="og:title" content="Qual IA Usar? Descubra a Melhor para Você">
-  <meta property="og:description" content="Compare ferramentas de inteligência artificial e descubra qual IA é ideal para o seu objetivo.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bemweb160-cloud.github.io/qual-ia/">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <header>
-    <h1>Qual IA Usar?</h1>
-    <p>Descubra a melhor inteligência artificial para você em poucos passos.</p>
-  </header>
+  <main class="container">
+    <h1>Qual IA é melhor para você?</h1>
+    <p class="subtitle">
+      Responda em poucos cliques e descubra a inteligência artificial ideal para o seu nível.
+    </p>
 
-  <main>
-
-    <!-- TEXTO SEO (muito importante) -->
-    <section>
-      <h2>Como escolher a melhor Inteligência Artificial</h2>
-      <p>
-        Com tantas ferramentas de inteligência artificial disponíveis, é comum ficar em dúvida sobre
-        qual IA usar. Algumas são melhores para escrever textos, outras para criar imagens,
-        vídeos, estudar ou automatizar tarefas.
-      </p>
-      <p>
-        Este site ajuda você a descobrir a melhor IA de acordo com seu nível de conhecimento
-        e com o que você deseja fazer, de forma simples e rápida.
-      </p>
-    </section>
-
-    <!-- QUESTIONÁRIO 1 -->
     <section id="nivel">
       <h2>Qual é o seu nível?</h2>
-      <button onclick="selecionarNivel('iniciante')">Iniciante</button>
-      <button onclick="selecionarNivel('intermediario')">Intermediário</button>
-      <button onclick="selecionarNivel('avancado')">Avançado</button>
+
+      <div class="buttons">
+        <button onclick="selecionarNivel('iniciante')">Iniciante</button>
+        <button onclick="selecionarNivel('intermediario')">Intermediário</button>
+        <button onclick="selecionarNivel('avancado')">Avançado</button>
+      </div>
     </section>
 
-    <!-- QUESTIONÁRIO 2 (só aparece depois) -->
-    <section id="objetivo" style="display:none;">
+    <section id="objetivo" class="hidden">
       <h2>Para que você quer usar IA?</h2>
-      <button onclick="selecionarObjetivo('texto')">Escrever textos</button>
-      <button onclick="selecionarObjetivo('imagem')">Criar imagens</button>
-      <button onclick="selecionarObjetivo('video')">Criar vídeos</button>
-      <button onclick="selecionarObjetivo('estudo')">Estudar / aprender</button>
+
+      <div class="buttons">
+        <button onclick="selecionarObjetivo('texto')">Escrever textos</button>
+        <button onclick="selecionarObjetivo('imagem')">Criar imagens</button>
+        <button onclick="selecionarObjetivo('video')">Criar vídeos</button>
+        <button onclick="selecionarObjetivo('produtividade')">Trabalho / Produtividade</button>
+      </div>
     </section>
 
-    <!-- RESULTADO -->
-    <section id="resultado" style="display:none;">
-      <h2>Recomendações de IA para você</h2>
-      <ul id="lista-ia"></ul>
+    <section id="resultado" class="hidden">
+      <h2>Recomendações para você</h2>
+      <div id="lista-resultados"></div>
     </section>
-
   </main>
 
-  <footer>
-    <p>© 2026 — Qual IA | Conteúdo informativo sobre inteligência artificial</p>
-  </footer>
-
-  <!-- JS -->
   <script src="script.js"></script>
-
 </body>
 </html>
