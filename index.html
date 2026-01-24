@@ -2,53 +2,35 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Qual IA escolher? Guia rápido por nível e objetivo</title>
-
-  <meta name="description" content="Descubra qual Inteligência Artificial escolher de acordo com seu nível e objetivo. Guia simples, rápido e gratuito." />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet" href="style.css" />
+  <title>Qual IA escolher? Descubra em 30 segundos</title>
+  <meta name="description" content="Descubra rapidamente qual IA é ideal para você. Ferramentas para texto, imagens, vídeos e produtividade.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="container">
-    <h1>Qual IA escolher?</h1>
-    <p class="subtitulo">
-      Descubra a melhor inteligência artificial para você em menos de 30 segundos.
-    </p>
-  </header>
+<div class="container">
+  <h1>Qual IA escolher?</h1>
+  <p class="subtitle">Responda duas perguntas rápidas e veja a melhor opção para você.</p>
 
-  <main class="container">
+  <!-- Pergunta 1 -->
+  <div class="card">
+    <h2>Qual é o seu nível?</h2>
+    <button onclick="setNivel('iniciante')">Iniciante</button>
+    <button onclick="setNivel('intermediario')">Intermediário</button>
+    <button onclick="setNivel('avancado')">Avançado</button>
+  </div>
 
-    <!-- PASSO 1 -->
-    <section id="passo-nivel">
-      <h2>1️⃣ Qual é o seu nível?</h2>
+  <!-- Pergunta 2 -->
+  <div class="card hidden" id="objetivoCard">
+    <h2>Para que você quer usar IA?</h2>
+    <button onclick="finalizar('texto')">Escrever textos</button>
+    <button onclick="finalizar('imagem')">Criar imagens</button>
+    <button onclick="finalizar('video')">Criar vídeos</button>
+  </div>
 
-      <div class="opcoes">
-        <button onclick="selecionarNivel('iniciante')">Iniciante</button>
-        <button onclick="selecionarNivel('intermediario')">Intermediário</button>
-        <button onclick="selecionarNivel('avancado')">Avançado</button>
-      </div>
-    </section>
+</div>
 
-    <!-- PASSO 2 -->
-    <section id="passo-objetivo" class="hidden">
-      <h2>2️⃣ Para que você quer usar IA?</h2>
-
-      <div class="opcoes">
-        <button onclick="selecionarObjetivo('texto')">✍️ Escrever textos</button>
-        <button onclick="selecionarObjetivo('imagem')">🎨 Criar imagens</button>
-        <button onclick="selecionarObjetivo('video')">🎥 Criar vídeos</button>
-        <button onclick="selecionarObjetivo('marketing')">📈 Marketing / anúncios</button>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="container footer">
-    <p>© 2026 • Guia independente de Inteligência Artificial</p>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
