@@ -3,61 +3,61 @@ let objetivoSelecionado = "";
 
 function selecionarNivel(nivel) {
   nivelSelecionado = nivel;
-
-  document.getElementById("objetivo").classList.remove("hidden");
-  document.getElementById("resultado").classList.add("hidden");
+  document.getElementById("passo-objetivo").classList.remove("hidden");
 }
 
 function selecionarObjetivo(objetivo) {
   objetivoSelecionado = objetivo;
-  mostrarResultado();
+
+  const params = new URLSearchParams({
+    nivel: nivelSelecionado,
+    objetivo: objetivoSelecionado
+  });
+
+  window.location.href = "resultado.html?" + params.toString();
 }
 
-function mostrarResultado() {
-  const resultado = document.getElementById("resultado");
-  const lista = document.getElementById("lista-resultados");
+// ============================
+// RESULTADO
+// ============================
 
-  let recomendacoes = [];
+if (window.location.pathname.includes("resultado.html")) {
+  const params = new URLSearchParams(window.location.search);
+  const nivel = params.get("nivel");
+  const objetivo = params.get("objetivo");
 
-  if (objetivoSelecionado === "texto") {
-    recomendacoes = [
-      "ChatGPT",
-      "Claude",
-      "Gemini"
-    ];
-  }
+  const resumo = document.getElementById("resumo");
+  const recomendacoes = document.getElementById("recomendacoes");
 
-  if (objetivoSelecionado === "imagem") {
-    recomendacoes = [
-      "Midjourney",
-      "DALL·E",
-      "Leonardo AI"
-    ];
-  }
+  resumo.innerText = `Perfil: ${nivel} • Objetivo: ${objetivo}`;
 
-  if (objetivoSelecionado === "video") {
-    recomendacoes = [
-      "Pika",
-      "Runway",
-      "Synthesia"
-    ];
-  }
+  const dados = {
+    texto: [
+      { nome: "IA Texto A", desc: "Boa para escrever artigos e posts." },
+      { nome: "IA Texto B", desc: "Ideal para copy e anúncios." },
+      { nome: "IA Texto C", desc: "Foco em produtividade." }
+    ],
+    imagem: [
+      { nome: "IA Imagem A", desc: "Criação artística rápida." },
+      { nome: "IA Imagem B", desc: "Imagens realistas." },
+      { nome: "IA Imagem C", desc: "Boa para designers." }
+    ],
+    video: [
+      { nome: "IA Vídeo A", desc: "Vídeos curtos." },
+      { nome: "IA Vídeo B", desc: "Vídeos realistas." },
+      { nome: "IA Vídeo C", desc: "Avançada para criadores." }
+    ],
+    marketing: [
+      { nome: "IA Marketing A", desc: "Automação de anúncios." },
+      { nome: "IA Marketing B", desc: "Copy persuasiva." },
+      { nome: "IA Marketing C", desc: "Funil e e-mails." }
+    ]
+  };
 
-  if (objetivoSelecionado === "produtividade") {
-    recomendacoes = [
-      "Notion AI",
-      "ChatGPT",
-      "Microsoft Copilot"
-    ];
-  }
-
-  lista.innerHTML = `
-    <p><strong>Nível:</strong> ${nivelSelecionado}</p>
-    <p><strong>Objetivo:</strong> ${objetivoSelecionado}</p>
-    <ul>
-      ${recomendacoes.map(item => `<li>${item}</li>`).join("")}
-    </ul>
-  `;
-
-  resultado.classList.remove("hidden");
+  dados[objetivo].forEach(item => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `<h3>${item.nome}</h3><p>${item.desc}</p>`;
+    recomendacoes.appendChild(div);
+  });
 }
