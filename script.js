@@ -1,31 +1,35 @@
 let nivelSelecionado = "";
 
-// ETAPA 1 → escolher nível
+/* =========================
+   ETAPA 1 – NÍVEL
+========================= */
 function setNivel(nivel) {
   nivelSelecionado = nivel;
 
   const objetivoCard = document.getElementById("objetivoCard");
-  objetivoCard.classList.remove("hidden");
+  if (!objetivoCard) return;
 
-  // rolagem suave para próxima etapa
+  objetivoCard.classList.remove("hidden");
   objetivoCard.scrollIntoView({ behavior: "smooth" });
 }
 
-// ETAPA 2 → finalizar e ir para resultado
+/* =========================
+   ETAPA 2 – OBJETIVO
+========================= */
 function finalizar(objetivo) {
+  if (!nivelSelecionado) return;
+
   localStorage.setItem("nivel", nivelSelecionado);
   localStorage.setItem("objetivo", objetivo);
 
-  // pequeno delay para UX
   setTimeout(() => {
     window.location.href = "resultado.html";
   }, 300);
 }
 
-/* ===========================
+/* =========================
    PÁGINA DE RESULTADO
-=========================== */
-
+========================= */
 if (document.body.classList.contains("resultado-page")) {
   const nivel = localStorage.getItem("nivel");
   const objetivo = localStorage.getItem("objetivo");
@@ -33,8 +37,10 @@ if (document.body.classList.contains("resultado-page")) {
   const resumo = document.getElementById("resumo");
   const lista = document.getElementById("lista");
 
-  if (!nivel || !objetivo) {
-    resumo.innerText = "Escolha não encontrada. Volte e refaça o teste.";
+  if (!resumo || !lista || !nivel || !objetivo) {
+    if (resumo) {
+      resumo.innerText = "Escolha não encontrada. Volte e refaça o teste.";
+    }
     return;
   }
 
@@ -42,8 +48,8 @@ if (document.body.classList.contains("resultado-page")) {
 
   const dados = {
     texto: [
-      { nome: "ChatGPT", desc: "Ideal para textos, ideias, estudos e produtividade." },
-      { nome: "Claude", desc: "Excelente para textos longos e explicações detalhadas." },
+      { nome: "ChatGPT", desc: "Ideal para escrita, estudos e produtividade." },
+      { nome: "Claude", desc: "Excelente para textos longos e detalhados." },
       { nome: "Gemini", desc: "Bom para pesquisa e integração com Google." }
     ],
     imagem: [
@@ -54,7 +60,7 @@ if (document.body.classList.contains("resultado-page")) {
     video: [
       { nome: "Runway", desc: "Criação e edição de vídeos com IA." },
       { nome: "Pika", desc: "Geração rápida de vídeos curtos." },
-      { nome: "Synthesia", desc: "Vídeos com avatar e apresentação profissional." }
+      { nome: "Synthesia", desc: "Vídeos com avatar profissional." }
     ]
   };
 
