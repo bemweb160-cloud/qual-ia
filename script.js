@@ -1,63 +1,60 @@
 let nivel = "";
 
-// Etapa 1 → escolhe nível
 function setNivel(n) {
   nivel = n;
+  const card = document.getElementById("objetivoCard");
+  card.classList.remove("hidden");
 
-  const cardObjetivo = document.getElementById("objetivoCard");
-  cardObjetivo.classList.remove("hidden");
-
-  // rolagem suave até a próxima etapa
-  cardObjetivo.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
+  card.scrollIntoView({ behavior: "smooth" });
 }
 
-// Etapa 2 → escolhe objetivo e vai para resultado
 function finalizar(objetivo) {
-  localStorage.setItem("nivel", nivel);
-  localStorage.setItem("objetivo", objetivo);
-  window.location.href = "resultado.html";
+  document.getElementById("loader").classList.remove("hidden");
+
+  setTimeout(() => {
+    localStorage.setItem("nivel", nivel);
+    localStorage.setItem("objetivo", objetivo);
+    window.location.href = "resultado.html";
+  }, 700);
 }
 
-// ===============================
-// Página de resultado
-// ===============================
 if (window.location.pathname.includes("resultado")) {
   const nivel = localStorage.getItem("nivel");
   const objetivo = localStorage.getItem("objetivo");
 
-  const resumo = document.getElementById("resumo");
-  const lista = document.getElementById("lista");
+  document.getElementById("resumo").innerText =
+    `Nível: ${nivel} • Objetivo: ${objetivo}`;
 
-  resumo.innerText = `Nível: ${nivel} • Objetivo: ${objetivo}`;
-
+  // 👉 AQUI você troca nomes, descrições e LINKS depois
   const dados = {
     texto: [
-      { nome: "ChatGPT", desc: "Excelente para escrita, ideias e produtividade." },
-      { nome: "Claude", desc: "Ótimo para textos longos e respostas naturais." },
-      { nome: "Gemini", desc: "Integração forte com Google e pesquisa." }
+      { nome: "Ferramenta A", desc: "Boa para escrita rápida e ideias." },
+      { nome: "Ferramenta B", desc: "Ideal para textos longos." },
+      { nome: "Ferramenta C", desc: "Foco em produtividade." }
     ],
     imagem: [
-      { nome: "Midjourney", desc: "Imagens artísticas de alta qualidade." },
-      { nome: "Leonardo AI", desc: "Ideal para imagens realistas e controle criativo." },
-      { nome: "DALL·E", desc: "Simples e rápido para criar imagens." }
+      { nome: "Ferramenta X", desc: "Criação de imagens realistas." },
+      { nome: "Ferramenta Y", desc: "Estilo artístico." },
+      { nome: "Ferramenta Z", desc: "Rápida e simples." }
     ],
     video: [
-      { nome: "Pika", desc: "Criação de vídeos curtos com IA." },
-      { nome: "Runway", desc: "Edição e geração de vídeo profissional." },
-      { nome: "Synthesia", desc: "Vídeos com avatar e apresentação." }
+      { nome: "Ferramenta V1", desc: "Vídeos curtos com IA." },
+      { nome: "Ferramenta V2", desc: "Vídeos profissionais." },
+      { nome: "Ferramenta V3", desc: "Avatares e apresentações." }
+    ],
+    produtividade: [
+      { nome: "Ferramenta P1", desc: "Organização e automação." },
+      { nome: "Ferramenta P2", desc: "Auxílio em tarefas diárias." },
+      { nome: "Ferramenta P3", desc: "Foco em trabalho." }
     ]
   };
+
+  const lista = document.getElementById("lista");
 
   dados[objetivo].forEach(item => {
     const div = document.createElement("div");
     div.className = "item";
-    div.innerHTML = `
-      <h3>${item.nome}</h3>
-      <p>${item.desc}</p>
-    `;
+    div.innerHTML = `<h3>${item.nome}</h3><p>${item.desc}</p>`;
     lista.appendChild(div);
   });
 }

@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Qual IA escolher? Descubra em 30 segundos</title>
-  <meta name="description" content="Descubra rapidamente qual IA é ideal para você. Ferramentas para texto, imagens, vídeos e produtividade.">
+  <meta name="description" content="Descubra qual inteligência artificial usar de acordo com seu nível e objetivo. Rápido, simples e gratuito.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<header>
   <h1>Qual IA escolher?</h1>
-  <p class="subtitle">Responda duas perguntas rápidas e veja a melhor opção para você.</p>
+  <p>Responda 2 perguntas rápidas e veja as melhores opções para você.</p>
+</header>
 
-  <!-- Pergunta 1 -->
-  <div class="card">
-    <h2>Qual é o seu nível?</h2>
+<main>
+
+<section class="card">
+  <h2>Qual é o seu nível?</h2>
+  <div class="buttons">
     <button onclick="setNivel('iniciante')">Iniciante</button>
     <button onclick="setNivel('intermediario')">Intermediário</button>
     <button onclick="setNivel('avancado')">Avançado</button>
   </div>
+</section>
 
-  <!-- Pergunta 2 -->
-  <div class="card hidden" id="objetivoCard">
-    <h2>Para que você quer usar IA?</h2>
+<section id="objetivoCard" class="card hidden">
+  <h2>Para que você quer usar IA?</h2>
+  <div class="buttons">
     <button onclick="finalizar('texto')">Escrever textos</button>
     <button onclick="finalizar('imagem')">Criar imagens</button>
     <button onclick="finalizar('video')">Criar vídeos</button>
+    <button onclick="finalizar('produtividade')">Trabalho / produtividade</button>
   </div>
+</section>
 
-</div>
+<div id="loader" class="hidden">Analisando suas respostas...</div>
+
+</main>
+
+<footer>
+  <p>Conteúdo independente • Atualizado regularmente</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
 </html>
+
