@@ -1,60 +1,78 @@
-let nivel = "";
+let nivelSelecionado = "";
 
-function setNivel(n) {
-  nivel = n;
-  const card = document.getElementById("objetivoCard");
-  card.classList.remove("hidden");
+// ETAPA 1 → escolher nível
+function setNivel(nivel) {
+  nivelSelecionado = nivel;
 
-  card.scrollIntoView({ behavior: "smooth" });
+  const objetivoCard = document.getElementById("objetivoCard");
+  objetivoCard.classList.remove("hidden");
+
+  // rolagem suave para próxima etapa
+  objetivoCard.scrollIntoView({ behavior: "smooth" });
 }
 
+// ETAPA 2 → finalizar e ir para resultado
 function finalizar(objetivo) {
-  document.getElementById("loader").classList.remove("hidden");
+  localStorage.setItem("nivel", nivelSelecionado);
+  localStorage.setItem("objetivo", objetivo);
 
+  // pequeno delay para UX
   setTimeout(() => {
-    localStorage.setItem("nivel", nivel);
-    localStorage.setItem("objetivo", objetivo);
     window.location.href = "resultado.html";
-  }, 700);
+  }, 300);
 }
 
-if (window.location.pathname.includes("resultado")) {
+/* ===========================
+   PÁGINA DE RESULTADO
+=========================== */
+
+if (document.body.classList.contains("resultado-page")) {
   const nivel = localStorage.getItem("nivel");
   const objetivo = localStorage.getItem("objetivo");
 
-  document.getElementById("resumo").innerText =
-    `Nível: ${nivel} • Objetivo: ${objetivo}`;
+  const resumo = document.getElementById("resumo");
+  const lista = document.getElementById("lista");
 
-  // 👉 AQUI você troca nomes, descrições e LINKS depois
+  if (!nivel || !objetivo) {
+    resumo.innerText = "Escolha não encontrada. Volte e refaça o teste.";
+    return;
+  }
+
+  resumo.innerText = `Nível: ${nivel} • Objetivo: ${objetivo}`;
+
   const dados = {
     texto: [
-      { nome: "Ferramenta A", desc: "Boa para escrita rápida e ideias." },
-      { nome: "Ferramenta B", desc: "Ideal para textos longos." },
-      { nome: "Ferramenta C", desc: "Foco em produtividade." }
+      { nome: "ChatGPT", desc: "Ideal para textos, ideias, estudos e produtividade." },
+      { nome: "Claude", desc: "Excelente para textos longos e explicações detalhadas." },
+      { nome: "Gemini", desc: "Bom para pesquisa e integração com Google." }
     ],
     imagem: [
-      { nome: "Ferramenta X", desc: "Criação de imagens realistas." },
-      { nome: "Ferramenta Y", desc: "Estilo artístico." },
-      { nome: "Ferramenta Z", desc: "Rápida e simples." }
+      { nome: "Midjourney", desc: "Imagens artísticas e criativas de alto nível." },
+      { nome: "Leonardo AI", desc: "Ótimo para imagens realistas e controle criativo." },
+      { nome: "DALL·E", desc: "Rápido e simples para gerar imagens." }
     ],
     video: [
-      { nome: "Ferramenta V1", desc: "Vídeos curtos com IA." },
-      { nome: "Ferramenta V2", desc: "Vídeos profissionais." },
-      { nome: "Ferramenta V3", desc: "Avatares e apresentações." }
-    ],
-    produtividade: [
-      { nome: "Ferramenta P1", desc: "Organização e automação." },
-      { nome: "Ferramenta P2", desc: "Auxílio em tarefas diárias." },
-      { nome: "Ferramenta P3", desc: "Foco em trabalho." }
+      { nome: "Runway", desc: "Criação e edição de vídeos com IA." },
+      { nome: "Pika", desc: "Geração rápida de vídeos curtos." },
+      { nome: "Synthesia", desc: "Vídeos com avatar e apresentação profissional." }
     ]
   };
 
-  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+
+  if (!dados[objetivo]) {
+    lista.innerHTML = "<p>Nenhuma recomendação encontrada.</p>";
+    return;
+  }
 
   dados[objetivo].forEach(item => {
     const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `<h3>${item.nome}</h3><p>${item.desc}</p>`;
+    div.className = "card";
+    div.innerHTML = `
+      <h3>${item.nome}</h3>
+      <p>${item.desc}</p>
+      <button class="cta">Qual escolher?</button>
+    `;
     lista.appendChild(div);
   });
 }
