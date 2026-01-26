@@ -1,3 +1,6 @@
+/* =========================
+   ESTADO GLOBAL
+========================= */
 let nivelSelecionado = "";
 
 /* =========================
@@ -22,25 +25,23 @@ function finalizar(objetivo) {
   localStorage.setItem("nivel", nivelSelecionado);
   localStorage.setItem("objetivo", objetivo);
 
-  setTimeout(() => {
-    window.location.href = "resultado.html";
-  }, 300);
+  window.location.href = "resultado.html";
 }
 
 /* =========================
    PÁGINA DE RESULTADO
 ========================= */
-if (document.body.classList.contains("resultado-page")) {
+document.addEventListener("DOMContentLoaded", () => {
+  if (!document.body.classList.contains("resultado-page")) return;
+
   const nivel = localStorage.getItem("nivel");
   const objetivo = localStorage.getItem("objetivo");
 
   const resumo = document.getElementById("resumo");
   const lista = document.getElementById("lista");
 
-  if (!resumo || !lista || !nivel || !objetivo) {
-    if (resumo) {
-      resumo.innerText = "Escolha não encontrada. Volte e refaça o teste.";
-    }
+  if (!nivel || !objetivo) {
+    resumo.innerText = "Escolha não encontrada. Volte e refaça o teste.";
     return;
   }
 
@@ -53,32 +54,26 @@ if (document.body.classList.contains("resultado-page")) {
       { nome: "Gemini", desc: "Bom para pesquisa e integração com Google." }
     ],
     imagem: [
-      { nome: "Midjourney", desc: "Imagens artísticas e criativas de alto nível." },
-      { nome: "Leonardo AI", desc: "Ótimo para imagens realistas e controle criativo." },
-      { nome: "DALL·E", desc: "Rápido e simples para gerar imagens." }
+      { nome: "Midjourney", desc: "Imagens artísticas e criativas." },
+      { nome: "Leonardo AI", desc: "Imagens realistas e controle criativo." },
+      { nome: "DALL·E", desc: "Simples e rápido." }
     ],
     video: [
-      { nome: "Runway", desc: "Criação e edição de vídeos com IA." },
-      { nome: "Pika", desc: "Geração rápida de vídeos curtos." },
+      { nome: "Runway", desc: "Criação e edição de vídeos." },
+      { nome: "Pika", desc: "Vídeos curtos com IA." },
       { nome: "Synthesia", desc: "Vídeos com avatar profissional." }
     ]
   };
 
   lista.innerHTML = "";
 
-  if (!dados[objetivo]) {
-    lista.innerHTML = "<p>Nenhuma recomendação encontrada.</p>";
-    return;
-  }
-
   dados[objetivo].forEach(item => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
       <h3>${item.nome}</h3>
       <p>${item.desc}</p>
-      <button class="cta">Qual escolher?</button>
     `;
-    lista.appendChild(div);
+    lista.appendChild(card);
   });
-}
+});
